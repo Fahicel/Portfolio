@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://use.typekit.net/zwm6quu.css">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/jquery.ScrollMagic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.js"></script>
+  <script src="main.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <h3>logo</h3>
+    <nav>
+      <ul>
+        <li><a href="#">A propos</a></li>
+        <li><a href="#">Projets</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <span>scroll</span>
+  <a href="index.html"><h1>FAHICEL GAOUA</h1></a>
+  <div class="social">
+    <ul>
+      <li><a href="#">INSTAGRAM</a></li>
+      <li><a href="#">BEHANCE</a></li>
+      <li><a href="#">EMAIL</a></li>
+    </ul>
+  </div>
+  <div id="scroll-container">
+  <section class="head">
+    <div class="project">
+      <div class="project-visual"></div>
+      <div class="gradient"></div>
+      <div class="project-infos">
+        <h2>Kaizen</h2>
+
+        <div class="desc">
+          <p class="title-project">Project</p>
+          <p class="desc-title">Création d'une marque de <br>vêtement japonaise</p>
+        </div>
+        <div class="desc">
+          <p class="title-project">Role</p>
+          <p class="desc-title">Direction / Design <br>Front-end</p>
+        </div>
+        <div class="desc">
+          <p class="title-project">Skills</p>
+          <p class="desc-title">Adobe XD / Photoshop <br>HTML / CSS / Javascript</p>
+        </div>
+
+      </div>
+
+      <img class="project-mockup" src="images-contenu/kaizen1.png" alt="Page d'accieul kaizen">
+      <img class="project-mockup" src="images-contenu/kaizen3.png" alt="Page d'accieul kaizen">
+      <img class="project-mockup" src="images-contenu/kaizen2.png" alt="Page d'accieul kaizen">
+      <img class="project-mockup" src="images-contenu/kaizen4.png" alt="Page d'accieul kaizen">
+
+
+      </div>
+
+      <div class="parallax"></div>
+      <div class="bandeau">
+      <p class="responsive-text">RESPONSIVE DESIGN </p>
+
+      </div>
+      <div class="project-mobile">
+        <img class="img-mobile" src="images-contenu/kaizenmobile2.png" alt="Page d'accieul kaizen">
+        <img class="img-mobile" src="images-contenu/kaizenmobile1.png" alt="Page d'accieul kaizen">
+        <img class="img-mobile" src="images-contenu/kaizenmobile3.png" alt="Page d'accieul kaizen">
+      </div>
+      <div class="next">
+        <a href="#">Next project</a>
+      </div>
+    <div class="next-project"></div>
+  </section>
+
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+var html = document.documentElement;
+var body = document.body;
+
+var scroller = {
+  target: document.querySelector("#scroll-container"),
+  ease: 0.05, // <= scroll speed
+  endY: 0,
+  y: 0,
+  resizeRequest: 1,
+  scrollRequest: 0,
+};
+
+var requestId = null;
+
+TweenLite.set(scroller.target, {
+  rotation: 0.01,
+  force3D: true
+});
+
+window.addEventListener("load", onLoad);
+
+function onLoad() {
+  updateScroller();
+  window.focus();
+  window.addEventListener("resize", onResize);
+  document.addEventListener("scroll", onScroll);
+}
+
+function updateScroller() {
+
+  var resized = scroller.resizeRequest > 0;
+
+  if (resized) {
+    var height = scroller.target.clientHeight;
+    body.style.height = height + "px";
+    scroller.resizeRequest = 0;
+  }
+
+  var scrollY = window.pageYOffset || html.scrollTop || body.scrollTop || 0;
+
+  scroller.endY = scrollY;
+  scroller.y += (scrollY - scroller.y) * scroller.ease;
+
+  if (Math.abs(scrollY - scroller.y) < 0.05 || resized) {
+    scroller.y = scrollY;
+    scroller.scrollRequest = 0;
+  }
+
+  TweenLite.set(scroller.target, {
+    y: -scroller.y
+  });
+
+  requestId = scroller.scrollRequest > 0 ? requestAnimationFrame(updateScroller) : null;
+}
+
+function onScroll() {
+  scroller.scrollRequest++;
+  if (!requestId) {
+    requestId = requestAnimationFrame(updateScroller);
+  }
+}
+
+function onResize() {
+  scroller.resizeRequest++;
+  if (!requestId) {
+    requestId = requestAnimationFrame(updateScroller);
+  }
+}
+</script>
+</body>
+</html>
